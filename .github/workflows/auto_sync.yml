@@ -21,8 +21,8 @@ jobs:
       - name: Checkout feature branch
         run: git checkout feature-branch
 
-      - name: Rebase feature branch with main
-        run: git rebase main
+      #- name: Rebase feature branch with main
+      #  run: git rebase main
 
       - name: Push changes to feature branch
         run: git push origin feature-branch
