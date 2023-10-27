@@ -11,10 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Git login
-        run: git config --global user.email "saiseshu1919@gmail.com"
-             git config --global user.name "saiseshu1919"
              
       - name: Checkout main branch
         run: git checkout main
@@ -30,3 +26,7 @@ jobs:
 
       - name: Push changes to feature branch
         run: git push origin feature-branch
+        
+      - name: Git login
+        run: git config --global user.email "saiseshu1919@gmail.com"
+             git config --global user.name "saiseshu1919"
