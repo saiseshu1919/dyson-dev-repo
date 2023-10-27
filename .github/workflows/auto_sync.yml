@@ -1,0 +1,22 @@
+name: Auto Sync Main to Feature
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  auto-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check Out Repository
+      uses: actions/checkout@v2
+
+    - name: Merge Main into Feature
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "GitHub Actions"
+        git checkout feature-branch
+        git merge main --no-edit
+        git push origin feature-branch
