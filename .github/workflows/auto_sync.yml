@@ -15,8 +15,8 @@ jobs:
 
     - name: Merge Main into Feature
       run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "GitHub Actions"
+        git config --global user.email "saiseshu1919@gmail.com"
+        git config --global user.name "saiseshu1919"
         git checkout feature-branch
         git merge main --no-edit
         git push origin feature-branch
