@@ -1,4 +1,4 @@
-name: Sync main to master
+name: Sync Feature Branch with Main
 
 on:
   push:
@@ -6,15 +6,17 @@ on:
       - main
 
 jobs:
-  sync-to-master:
-    name: sync-to-master
+  sync-feature-branch:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Synchronize main and feature branches
+    - name: Check Out Repository
+      uses: actions/checkout@v2
+
+    - name: Sync with Main
       run: |
-        git checkout feature-branch
-        git merge main --no-edit
-        git push origin feature-branch
+        git checkout -B feature-branch
+        git pull origin main
+        git push --force origin feature-branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
