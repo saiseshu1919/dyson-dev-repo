@@ -1,4 +1,4 @@
-name: Sync Main with Feature Branch
+name: Sync main to master
 
 on:
   push:
@@ -6,31 +6,18 @@ on:
       - main
 
 jobs:
-  sync:
+  sync-to-master:
+    name: sync-to-master
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-             
-      - name: Checkout main branch
-        run: git checkout main
-
-   #   - name: Pull latest changes
-   #     run: git pull
-
-      - name: Checkout feature branch
-        run: git checkout feature-branch
-
-      #- name: Rebase feature branch with main
-      #  run: git rebase main
-
-      - name: Push changes to feature branch
-        run: git push origin feature-branch
-        
-      - name: Opening pull request
-        id: pull
-        uses: tretuna/sync-branches@1.4.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "main"
-          TO_BRANCH: "feature-branch"
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Synchronize main and feature branches
+      run: |
+        git checkout $TARGET_BRANCH
+        git merge --ff-only $SOURCE_BRANCH
+        git push origin $TARGET_BRANCH
+      env:
+        SOURCE_BRANCH: main
+        TARGET_BRANCH: feature-branch
